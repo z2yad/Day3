@@ -244,31 +244,113 @@
                 </div>
             </div>
             <!--Table for patient-->
-            <table>
-                <!--table header-->
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <!--table body-->
-                <tbody>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>[EMAIL_ADDRESS]</td>
-                        <td>1234567890</td>
-                        <td>123 Main St</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <!--table header-->
+                    <thead>
+                        <tr class="border-b border-gray-100 text-xs font-semibold text-gray-500">
+                            <th class="py-3 px-3 w-10">
+                                <input type="checkbox"
+                                    class="w-4 h-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer accent-emerald-600">
+                            </th>
+                            <th class="py-3 px-4">Patient Name</th>
+                            <th class="py-3 px-4">ID Number</th>
+                            <th class="py-3 px-4">Admission Date</th>
+                            <th class="py-3 px-4">Age</th>
+                            <th class="py-3 px-4">Diagonose</th>
+                            <th class="py-3 px-4">Status</th>
+                            <th class="py-3 px-4">Room Number</th>
+                        </tr>
+                    </thead>
+                    <!--table body-->
+                    <tbody class="divide-y divide-gray-100 text-sm">
+                        <tr class="hover:bg-gray-50/50 transition-colors">
+                            <td class="py-3.5 px-3">
+                                <input type="checkbox"
+                                    class="w-4 h-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer accent-emerald-600">
+                            </td>
+                            <td class="py-3.5 px-4 font-semibold text-gray-900">
+                                <div class="flex items-center gap-3">
+                                    <span
+                                        class="w-9 h-9 rounded-xl overflow-hidden shrink-0 inline-flex items-center justify-center bg-gray-100 border border-gray-100 shadow-sm">
+                                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100"
+                                            alt="Sarah Johnson" class="w-full h-full object-cover">
+                                    </span>
+                                    <span>Sarah Johnson</span>
+                                </div>
+                            </td>
+                            <td class="py-3.5 px-4 font-semibold text-gray-800">#BR263585643</td>
+                            <td class="py-3.5 px-4 text-gray-600 font-medium">6 Jan 2024</td>
+                            <td class="py-3.5 px-4 text-gray-600 font-medium">35</td>
+                            <td class="py-3.5 px-4 text-gray-700 font-semibold">General Medicine</td>
+                            <td class="py-3.5 px-4">
+                                <span
+                                    class="px-2.5 py-1 text-xs font-semibold bg-emerald-50 text-emerald-600 rounded-full inline-flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                    Active
+                                </span>
+                            </td>
+                            <td class="py-3.5 px-4 font-semibold text-gray-800">205</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50/50 transition-colors">
+                            <td class="py-3.5 px-3">
+                                <input type="checkbox"
+                                    class="w-4 h-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer accent-emerald-600">
+                            </td>
+                            <td class="py-3.5 px-4 font-semibold text-gray-900">
+                                <div class="flex items-center gap-3">
+                                    <span
+                                        class="w-9 h-9 rounded-xl overflow-hidden shrink-0 inline-flex items-center justify-center bg-gray-100 border border-gray-100 shadow-sm">
+                                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100"
+                                            alt="Jude Billingham" class="w-full h-full object-cover">
+                                    </span>
+                                    <span>Jude Billingham</span>
+                                </div>
+                            </td>
+                            <td class="py-3.5 px-4 font-semibold text-gray-800">#BM5452103201</td>
+                            <td class="py-3.5 px-4 text-gray-600 font-medium">9 Jan 2024</td>
+                            <td class="py-3.5 px-4 text-gray-600 font-medium">27</td>
+                            <td class="py-3.5 px-4 text-gray-700 font-semibold">Cardiology</td>
+                            <td class="py-3.5 px-4">
+                                <span
+                                    class="px-2.5 py-1 text-xs font-semibold bg-emerald-50 text-emerald-600 rounded-full inline-flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                    Active
+                                </span>
+                            </td>
+                            <td class="py-3.5 px-4 font-semibold text-gray-800">275</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50/50 transition-colors">
+                            <td class="py-3.5 px-3">
+                                <input type="checkbox"
+                                    class="w-4 h-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer accent-emerald-600">
+                            </td>
+                            <td class="py-3.5 px-4 font-semibold text-gray-900">
+                                <div class="flex items-center gap-3">
+                                    <span
+                                        class="w-9 h-9 rounded-xl overflow-hidden shrink-0 inline-flex items-center justify-center bg-gray-100 border border-gray-100 shadow-sm">
+                                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100"
+                                            alt="Leslie Alexander" class="w-full h-full object-cover">
+                                    </span>
+                                    <span>Leslie Alexander</span>
+                                </div>
+                            </td>
+                            <td class="py-3.5 px-4 font-semibold text-gray-800">#BG4120165761</td>
+                            <td class="py-3.5 px-4 text-gray-600 font-medium">11 Jan 2024</td>
+                            <td class="py-3.5 px-4 text-gray-600 font-medium">45</td>
+                            <td class="py-3.5 px-4 text-gray-700 font-semibold">Gastroenterology</td>
+                            <td class="py-3.5 px-4">
+                                <span
+                                    class="px-2.5 py-1 text-xs font-semibold bg-emerald-50 text-emerald-600 rounded-full inline-flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                    Active
+                                </span>
+                            </td>
+                            <td class="py-3.5 px-4 font-semibold text-gray-800">175</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </main>
