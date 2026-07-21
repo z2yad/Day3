@@ -173,7 +173,7 @@ export class Dashbord implements AfterViewInit {
               color: '#374151',
               font: {
                 size: 11,
-                weight: '500',
+                weight: 500,
               },
             },
             ticks: {
