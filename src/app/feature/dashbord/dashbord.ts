@@ -74,7 +74,7 @@ export class Dashbord implements AfterViewInit {
             boxPadding: 6,
             usePointStyle: true,
             callbacks: {
-              label: (context) => {
+              label: (context: any) => {
                 let label = context.dataset.label || '';
                 if (label) {
                   label += ': ';
@@ -108,7 +108,7 @@ export class Dashbord implements AfterViewInit {
             ticks: {
               color: '#6b7280',
               stepSize: 5,
-              callback: (value) => '$' + value + 'K',
+              callback: (value: any) => '$' + value + 'K',
               font: {
                 size: 12,
               },
