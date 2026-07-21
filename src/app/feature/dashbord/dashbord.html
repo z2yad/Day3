@@ -216,7 +216,7 @@
                     <h2 class="text-xl font-semibold text-gray-800 ">Patient List</h2>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button class=" flex items-center border-2 border-gray-300 cursor-pointer p-2 rounded-md">
+                    <button class=" flex items-center border-2 border-gray-300 cursor-pointer p-2 rounded-md gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -225,7 +225,7 @@
 
                         <span> Sort by</span>
                     </button>
-                    <button class=" flex items-center border-2 border-gray-300 cursor-pointer p-2 rounded-md">
+                    <button class=" flex items-center border-2 border-gray-300 cursor-pointer p-2 rounded-md gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -233,7 +233,7 @@
                         </svg>
                         <span>Filter</span>
                     </button>
-                    <button class=" flex items-center border-2 border-gray-300 cursor-pointer">
+                    <button class=" flex items-center border-2 border-gray-300 cursor-pointer p-2 rounded-md gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -243,6 +243,32 @@
                     </button>
                 </div>
             </div>
+            <!--Table for patient-->
+            <table>
+                <!--table header-->
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <!--table body-->
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>[EMAIL_ADDRESS]</td>
+                        <td>1234567890</td>
+                        <td>123 Main St</td>
+                        <td>
+                            <button>Edit</button>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </main>
