@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterLink } from "@angular/router";
-import { Dashbord } from '../../feature/dashbord/dashbord';
 
 @Component({
   selector: 'app-side-bar',
-  imports: [RouterLink,Dashbord],
+  imports: [RouterLink],
   templateUrl: './side-bar.html',
   styleUrl: './side-bar.css',
 })
