@@ -1,5 +1,8 @@
 import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+import { inject } from '@angular/core';
+import { Weather } from '../../services/weather';
+import { WeatherResponse } from '../../inerfaces/weather';
 
 Chart.register(...registerables);
 
@@ -15,6 +18,20 @@ export class Dashbord implements AfterViewInit {
 
   summaryChart!: Chart;
   radarChart!: Chart;
+  Weatherservice = inject(Weather);
+  weather!: WeatherResponse;
+
+  ngOnInit(): void {
+    this.Weatherservice.getWeather().subscribe({
+      next: (res) => {
+        this.weather = res;
+        console.log(this.weather.daily);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 
   ngAfterViewInit(): void {
     this.initSummaryChart();
@@ -120,6 +137,8 @@ export class Dashbord implements AfterViewInit {
   }
 
   private initRadarChart(): void {
+
+
     if (!this.radarChartRef) return;
     const ctx = this.radarChartRef.nativeElement.getContext('2d');
     if (!ctx) return;
@@ -186,4 +205,5 @@ export class Dashbord implements AfterViewInit {
       },
     });
   }
+
 }
