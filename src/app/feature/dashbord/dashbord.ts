@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { inject } from '@angular/core';
 import { Weather } from '../../services/weather';
@@ -12,27 +12,49 @@ Chart.register(...registerables);
   templateUrl: './dashbord.html',
   styleUrl: './dashbord.css',
 })
-export class Dashbord implements AfterViewInit {
+export class Dashbord implements AfterViewInit, OnInit {
   @ViewChild('summaryChart') summaryChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('radarChart') radarChartRef!: ElementRef<HTMLCanvasElement>;
+
 
   summaryChart!: Chart;
   radarChart!: Chart;
   Weatherservice = inject(Weather);
   weather!: WeatherResponse;
-
+  //variable for current  weather
+  temperature: number = 0;
+  humidity: number = 0;
+  windspeed: number = 0;
+  rain: number = 0;
+  time: string = '2026/01/01';
+  //variables for daily weather
+  temperatureMax: number[] = [];
+  temperatureMin: number[] = [];
+  rainSum: number[] = [];
+  windSpeed10mMax: number[] = [];
+  dailyTime: string[] = [];
   ngOnInit(): void {
     this.Weatherservice.getWeather().subscribe({
       next: (res) => {
+        //current weather
         this.weather = res;
-        console.log(this.weather.daily);
+        this.temperature = res.current.temperature_2m;
+        this.humidity = res.current.relative_humidity_2m;
+        this.windspeed = res.current.wind_speed_10m;
+        this.rain = res.current.rain;
+        this.time = res.current.time;
+        //daily weather
+        this.temperatureMax = res.daily.temperature_2m_max;
+        this.temperatureMin = res.daily.temperature_2m_min;
+        this.rainSum = res.daily.rain_sum;
+        this.windSpeed10mMax = res.daily.wind_speed_10m_max;
+        this.dailyTime = res.daily.time;
       },
       error: (err) => {
         console.log(err);
       },
     });
   }
-
   ngAfterViewInit(): void {
     this.initSummaryChart();
     this.initRadarChart();
