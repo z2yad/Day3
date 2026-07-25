@@ -95,15 +95,27 @@ export class Dashbord implements AfterViewInit, OnInit {
           const day2 = this.windSpeed10mMax[1];
           this.windSpeedDiff = Number((day2 - day1).toFixed(1));
           this.windSpeedPrecent = (day1 !== 0 ? ((this.windSpeedDiff / day1) * 100).toFixed(2) : '0') + '%';
-        
-      }
-      console.log(res)
+        }
+        console.log(res);
+
+        // 👈 Update chart data dynamically when API response arrives
+        this.updateSummaryChart();
       },
       error: (err) => {
         console.log(err);
       },
     });
   }
+
+  private updateSummaryChart(): void {
+    if (!this.summaryChart) return;
+    this.summaryChart.data.labels = this.dailyTime;
+    this.summaryChart.data.datasets[0].data = this.temperatureMax;
+    this.summaryChart.data.datasets[1].data = this.temperatureMin;
+    this.summaryChart.data.datasets[2].data = this.windSpeed10mMax;
+    this.summaryChart.update();
+  }
+
   ngAfterViewInit(): void {
     this.initSummaryChart();
     this.initRadarChart();
@@ -120,7 +132,7 @@ export class Dashbord implements AfterViewInit, OnInit {
         labels: this.dailyTime,
         datasets: [
           {
-            label: 'Inpatient',
+            label: 'Temperature Max',
             data: this.temperatureMax,
             backgroundColor: '#10b981',
             borderRadius: 6,
@@ -128,7 +140,7 @@ export class Dashbord implements AfterViewInit, OnInit {
             categoryPercentage: 0.7,
           },
           {
-            label: 'Emergency',
+            label: 'Temperature Min',
             data: this.temperatureMin,
             backgroundColor: '#f59e0b',
             borderRadius: 6,
@@ -136,7 +148,7 @@ export class Dashbord implements AfterViewInit, OnInit {
             categoryPercentage: 0.7,
           },
           {
-            label: 'Discharged',
+            label: 'Wind Speed Max',
             data: this.windSpeed10mMax,
             backgroundColor: '#f87171',
             borderRadius: 6,
@@ -168,7 +180,7 @@ export class Dashbord implements AfterViewInit, OnInit {
                   label += ': ';
                 }
                 if (context.parsed.y !== null) {
-                  label += context.parsed.y * 10;
+                  label += context.parsed.y;
                 }
                 return label;
               },
@@ -188,15 +200,13 @@ export class Dashbord implements AfterViewInit, OnInit {
             },
           },
           y: {
-            min: 10,
-            max: 30,
             grid: {
               color: '#f3f4f6',
             },
             ticks: {
               color: '#6b7280',
               stepSize: 5,
-              callback: (value: any) => '$' + value + 'K',
+              callback: (value: any) => value,
               font: {
                 size: 12,
               },
