@@ -100,6 +100,7 @@ export class Dashbord implements AfterViewInit, OnInit {
 
         // 👈 Update chart data dynamically when API response arrives
         this.updateSummaryChart();
+        this.updateRadarChart();
       },
       error: (err) => {
         console.log(err);
@@ -114,6 +115,19 @@ export class Dashbord implements AfterViewInit, OnInit {
     this.summaryChart.data.datasets[1].data = this.temperatureMin;
     this.summaryChart.data.datasets[2].data = this.windSpeed10mMax;
     this.summaryChart.update();
+  }
+
+  private updateRadarChart(): void {
+    if (!this.radarChart) return;
+    this.radarChart.data.datasets[0].data = [
+      this.temperature,
+      this.humidity,
+      this.windspeed,
+      this.rain,
+      this.temperatureMax[0] || 0,
+      this.temperatureMin[0] || 0,
+    ];
+    this.radarChart.update();
   }
 
   ngAfterViewInit(): void {
@@ -218,8 +232,6 @@ export class Dashbord implements AfterViewInit, OnInit {
   }
 
   private initRadarChart(): void {
-
-
     if (!this.radarChartRef) return;
     const ctx = this.radarChartRef.nativeElement.getContext('2d');
     if (!ctx) return;
@@ -228,19 +240,24 @@ export class Dashbord implements AfterViewInit, OnInit {
       type: 'radar',
       data: {
         labels: [
-          'Diabetes',
-          'Asthma',
-          'Epilepsy',
-          'Cancer',
-          'Allergies',
-          'Heart Disease',
-          'Depression',
-          'Hypertension',
+          'Temperature (°C)',
+          'Humidity (%)',
+          'Wind Speed (km/h)',
+          'Rain (mm)',
+          'Temp Max (°C)',
+          'Temp Min (°C)',
         ],
         datasets: [
           {
-            label: 'Diagnosis Count',
-            data: [75, 60, 70, 50, 65, 80, 55, 70],
+            label: 'Weather Metrics',
+            data: [
+              this.temperature,
+              this.humidity,
+              this.windspeed,
+              this.rain,
+              this.temperatureMax[0] || 0,
+              this.temperatureMin[0] || 0,
+            ],
             fill: true,
             backgroundColor: 'rgba(16, 185, 129, 0.2)',
             borderColor: '#10b981',
