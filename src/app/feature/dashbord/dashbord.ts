@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { Chart, registerables } from 'chart.js';
 import { inject } from '@angular/core';
 import { Weather } from '../../services/weather';
@@ -8,7 +9,7 @@ Chart.register(...registerables);
 
 @Component({
   selector: 'app-dashbord',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './dashbord.html',
   styleUrl: './dashbord.css',
 })
@@ -30,9 +31,23 @@ export class Dashbord implements AfterViewInit, OnInit {
   //variables for daily weather
   temperatureMax: number[] = [];
   temperatureMin: number[] = [];
+
   rainSum: number[] = [];
   windSpeed10mMax: number[] = [];
   dailyTime: string[] = [];
+  //create variables for diff and percent of weather metrics
+  tempDiff: number = 0;
+  tempPrecent: string = '0%';
+
+  tempMinDiff: number = 0;
+  tempMinPrecent: string = '0%';
+
+  rainSumDiff: number = 0;
+  rainSumPrecent: string = '0%';
+
+  windSpeedDiff: number = 0;
+  windSpeedPrecent: string = '0%';
+
   ngOnInit(): void {
     this.Weatherservice.getWeather().subscribe({
       next: (res) => {
@@ -49,6 +64,40 @@ export class Dashbord implements AfterViewInit, OnInit {
         this.rainSum = res.daily.rain_sum;
         this.windSpeed10mMax = res.daily.wind_speed_10m_max;
         this.dailyTime = res.daily.time;
+
+        // 1. Temperature Max Diff & Percent
+        if (this.temperatureMax.length >= 2) {
+          const day1 = this.temperatureMax[0];
+          const day2 = this.temperatureMax[1];
+          this.tempDiff = Number((day2 - day1).toFixed(1));
+          this.tempPrecent = (day1 !== 0 ? ((this.tempDiff / day1) * 100).toFixed(2) : '0') + '%';
+        }
+
+        // 2. Temperature Min Diff & Percent
+        if (this.temperatureMin.length >= 2) {
+          const day1 = this.temperatureMin[0];
+          const day2 = this.temperatureMin[1];
+          this.tempMinDiff = Number((day2 - day1).toFixed(1));
+          this.tempMinPrecent = (day1 !== 0 ? ((this.tempMinDiff / day1) * 100).toFixed(2) : '0') + '%';
+        }
+
+        // 3. Rain Sum Diff & Percent
+        if (this.rainSum.length >= 2) {
+          const day1 = this.rainSum[0];
+          const day2 = this.rainSum[1];
+          this.rainSumDiff = Number((day2 - day1).toFixed(1));
+          this.rainSumPrecent = (day1 !== 0 ? ((this.rainSumDiff / day1) * 100).toFixed(2) : '0') + '%';
+        }
+
+        // 4. Wind Speed Max Diff & Percent
+        if (this.windSpeed10mMax.length >= 2) {
+          const day1 = this.windSpeed10mMax[0];
+          const day2 = this.windSpeed10mMax[1];
+          this.windSpeedDiff = Number((day2 - day1).toFixed(1));
+          this.windSpeedPrecent = (day1 !== 0 ? ((this.windSpeedDiff / day1) * 100).toFixed(2) : '0') + '%';
+        
+      }
+      console.log(res)
       },
       error: (err) => {
         console.log(err);
