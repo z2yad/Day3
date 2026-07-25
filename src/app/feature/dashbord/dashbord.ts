@@ -117,11 +117,11 @@ export class Dashbord implements AfterViewInit, OnInit {
     this.summaryChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        labels: this.dailyTime,
         datasets: [
           {
             label: 'Inpatient',
-            data: [27, 20, 28, 24, 23, 21, 25],
+            data: this.temperatureMax,
             backgroundColor: '#10b981',
             borderRadius: 6,
             barPercentage: 0.6,
@@ -129,7 +129,7 @@ export class Dashbord implements AfterViewInit, OnInit {
           },
           {
             label: 'Emergency',
-            data: [24, 24, 22, 27, 22, 20, 24],
+            data: this.temperatureMin,
             backgroundColor: '#f59e0b',
             borderRadius: 6,
             barPercentage: 0.6,
@@ -137,7 +137,7 @@ export class Dashbord implements AfterViewInit, OnInit {
           },
           {
             label: 'Discharged',
-            data: [19, 21, 25, 22, 21, 18, 26],
+            data: this.windSpeed10mMax,
             backgroundColor: '#f87171',
             borderRadius: 6,
             barPercentage: 0.6,
