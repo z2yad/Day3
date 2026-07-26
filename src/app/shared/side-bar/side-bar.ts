@@ -7,6 +7,7 @@ import { RouterLink } from "@angular/router";
   imports: [RouterLink,NgClass],
   templateUrl: './side-bar.html',
   styleUrl: './side-bar.css',
+  standalone:true,
 })
 export class SideBar {
  isopensidebar = false;
