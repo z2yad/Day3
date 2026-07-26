@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { Chart, registerables } from 'chart.js';
 import { inject } from '@angular/core';
 import { Weather } from '../../services/weather';
@@ -9,11 +9,11 @@ Chart.register(...registerables);
 
 @Component({
   selector: 'app-dashbord',
-  imports: [NgClass],
+  imports: [NgClass,CommonModule],
   templateUrl: './dashbord.html',
   styleUrl: './dashbord.css',
 })
-export class Dashbord implements AfterViewInit, OnInit {
+export class Dashbord implements OnInit {
   @ViewChild('summaryChart') summaryChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('radarChart') radarChartRef!: ElementRef<HTMLCanvasElement>;
 
@@ -97,6 +97,7 @@ export class Dashbord implements AfterViewInit, OnInit {
           this.windSpeedPrecent = (day1 !== 0 ? ((this.windSpeedDiff / day1) * 100).toFixed(2) : '0') + '%';
         }
         console.log(res);
+        console.log(this.temperatureMax[0])
 
         // 👈 Update chart data dynamically when API response arrives
         this.updateSummaryChart();

@@ -1,4 +1,5 @@
 <main class="p-6 space-y-6 bg-gray-50 min-h-screen">
+{{temperatureMax}}
     <!-- Header -->
     <header class="flex justify-between items-center">
         <div class="flex items-center gap-3 bg-white px-4 py-2 rounded-xl border border-gray-200 shadow-sm">
@@ -21,14 +22,15 @@
     <div class="grid grid-cols-4  gap-4">
         <!-- Stat Cards -->
         <!-- Stat Card 1: Temperature Max -->
-        <div
-            class="col-span-1 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between space-y-4">
+        <div class=" sm:col-span-4 lg:col-span-1 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between space-y-4">
             <div>
                 <div class="flex items-center gap-2 mb-3">
                     <div
                         class="w-8 h-8 rounded-lg border border-gray-200 bg-white flex items-center justify-center text-amber-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.236-1.591 1.591M5.25 12H3m4.236-4.773L5.644 5.636M12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5Z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.236-1.591 1.591M5.25 12H3m4.236-4.773L5.644 5.636M12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5Z" />
                         </svg>
                     </div>
                     <span class="text-sm font-medium text-gray-500">temperature Max</span>
@@ -41,14 +43,16 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
                         </svg>
-                        
+
                         {{tempPrecent}}
                     </span>
                 </div>
             </div>
             <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
                 <div>
-                    <strong class="font-bold text-gray-900" [ngClass]="tempDiff >= 0 ? 'text-emerald-500 bg-emerald-200 rounded p-1' : 'text-red-500 bg-red-200  rounded p-1'">{{tempDiff}}</strong> <span class="ml-1">from yesterday</span>
+                    <strong class="font-bold text-gray-900"
+                        [ngClass]="tempDiff >= 0 ? 'text-emerald-500 bg-emerald-200 rounded p-1' : 'text-red-500 bg-red-200  rounded p-1'">{{tempDiff}}</strong>
+                    <span class="ml-1">from yesterday</span>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-4 h-4 text-gray-800">
@@ -58,14 +62,15 @@
         </div>
 
         <!-- Card 2: Temperature Min -->
-        <div
-            class="col-span-1 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between space-y-4">
+        <div class=" sm:col-span-4 lg:col-span-1 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between space-y-4">
             <div>
                 <div class="flex items-center gap-2 mb-3">
                     <div
                         class="w-8 h-8 rounded-lg border border-gray-200 bg-white flex items-center justify-center text-blue-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z" />
                         </svg>
                     </div>
                     <span class="text-sm font-medium text-gray-500">temperature Min</span>
@@ -84,7 +89,9 @@
             </div>
             <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
                 <div>
-                    <strong class="font-bold text-gray-900" [ngClass]="tempMinDiff >= 0 ? 'text-emerald-500 bg-emerald-200 rounded p-1' : 'text-red-500 bg-red-200 rounded p-1'">{{tempMinDiff}}</strong> <span class="ml-1">from yesterday</span>
+                    <strong class="font-bold text-gray-900"
+                        [ngClass]="tempMinDiff >= 0 ? 'text-emerald-500 bg-emerald-200 rounded p-1' : 'text-red-500 bg-red-200 rounded p-1'">{{tempMinDiff}}</strong>
+                    <span class="ml-1">from yesterday</span>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-4 h-4 text-gray-800">
@@ -94,14 +101,15 @@
         </div>
 
         <!-- Card 3: Rain Sum -->
-        <div
-            class="col-span-1 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between space-y-4">
+        <div class=" sm:col-span-4 lg:col-span-1 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between space-y-4">
             <div>
                 <div class="flex items-center gap-2 mb-3">
                     <div
                         class="w-8 h-8 rounded-lg border border-gray-200 bg-white flex items-center justify-center text-sky-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75 0 4.29 2.766 7.933 6.643 9.22a.75.75 0 0 0 .964-.712v-1.077c-3.136-.372-5.407-3.036-5.407-6.181 0-3.452 2.798-6.25 6.25-6.25s6.25 2.798 6.25 6.25c0 3.145-2.271 5.809-5.407 6.181v1.077a.75.75 0 0 0 .964.712C18.984 20.183 21.75 16.54 21.75 12.25c0-5.385-4.365-9.75-9.75-9.75Z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75 0 4.29 2.766 7.933 6.643 9.22a.75.75 0 0 0 .964-.712v-1.077c-3.136-.372-5.407-3.036-5.407-6.181 0-3.452 2.798-6.25 6.25-6.25s6.25 2.798 6.25 6.25c0 3.145-2.271 5.809-5.407 6.181v1.077a.75.75 0 0 0 .964.712C18.984 20.183 21.75 16.54 21.75 12.25c0-5.385-4.365-9.75-9.75-9.75Z" />
                         </svg>
                     </div>
                     <span class="text-sm font-medium text-gray-500">Rain Sum</span>
@@ -120,7 +128,9 @@
             </div>
             <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
                 <div>
-                    <strong class="font-bold text-gray-900" [ngClass]="rainSumDiff >= 0 ? 'text-emerald-500 bg-emerald-200 rounded p-1' : 'text-red-500 bg-red-200 rounded p-1'">{{rainSumDiff}}</strong> <span class="ml-1">from yesterday</span>
+                    <strong class="font-bold text-gray-900"
+                        [ngClass]="rainSumDiff >= 0 ? 'text-emerald-500 bg-emerald-200 rounded p-1' : 'text-red-500 bg-red-200 rounded p-1'">{{rainSumDiff}}</strong>
+                    <span class="ml-1">from yesterday</span>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-4 h-4 text-gray-800">
@@ -130,14 +140,15 @@
         </div>
 
         <!-- Card 4: Wind Speed Max -->
-        <div
-            class="col-span-1 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between space-y-4">
+        <div class=" sm:col-span-4  lg:col-span-1 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between space-y-4">
             <div>
                 <div class="flex items-center gap-2 mb-3">
                     <div
                         class="w-8 h-8 rounded-lg border border-gray-200 bg-white flex items-center justify-center text-teal-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h12m-12 5.25h16.5" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h12m-12 5.25h16.5" />
                         </svg>
                     </div>
                     <span class="text-sm font-medium text-gray-500">Wind Speed Max</span>
@@ -156,7 +167,9 @@
             </div>
             <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
                 <div>
-                    <strong class="font-bold text-gray-900" [ngClass]="windSpeedDiff >= 0 ? 'text-emerald-500 bg-emerald-200 rounded p-1' : 'text-red-500 bg-red-200 rounded p-1'">{{windSpeedDiff}}</strong> <span class="ml-1">from yesterday</span>
+                    <strong class="font-bold text-gray-900"
+                        [ngClass]="windSpeedDiff >= 0 ? 'text-emerald-500 bg-emerald-200 rounded p-1' : 'text-red-500 bg-red-200 rounded p-1'">{{windSpeedDiff}}</strong>
+                    <span class="ml-1">from yesterday</span>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-4 h-4 text-gray-800">
@@ -169,7 +182,7 @@
         <!-- Charts Row -->
 
         <!-- Weather Forecast Bar Chart -->
-        <div class="col-span-3 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-4">
+        <div class="sm:col-span-4 lg:col-span-3 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-4">
             <div class="flex flex-wrap justify-between items-center gap-4">
                 <div class="flex items-center gap-2">
                     <div class="p-2 bg-emerald-50 text-emerald-600 rounded-xl">
@@ -216,7 +229,7 @@
 
         <!-- Diagnosis Breakdown Radar Chart -->
         <div
-            class="col-span-1 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between space-y-4">
+            class="sm:col-span-4 lg:col-span-1 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between space-y-4">
             <div>
                 <div class="flex justify-between items-center">
                     <div class="flex items-center gap-2">
