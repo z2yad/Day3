@@ -28,7 +28,7 @@ export class Dashbord implements OnInit {
   windspeed: number[] = [];
   rain: number[] = [];
   time: string[] = [];
-  
+
   //variables for daily weather
   temperatureMax: number[] = [];
   temperatureMin: number[] = [];
@@ -67,7 +67,7 @@ export class Dashbord implements OnInit {
         this.rainSum = res.daily.rain_sum;
         this.windSpeed10mMax = res.daily.wind_speed_10m_max;
         this.dailyTime = res.daily.time;
-        
+
         //calculate max temp using current
 
         // 1. Temperature Max Diff & Percent
@@ -103,7 +103,7 @@ export class Dashbord implements OnInit {
         }
         console.log(res);
         console.log(this.temperatureMax[0])
-        
+
         this.calculateTemperatureMax();
         //  Update chart data dynamically when API response arrives
         this.updateSummaryChart();
@@ -114,33 +114,30 @@ export class Dashbord implements OnInit {
       },
     });
   }
-   //calculate max temp using current
-private calculateTemperatureMax() {
+  //calculate max temp using current
+  private calculateTemperatureMax() {
 
-  const times = this.weather.hourly.time;
-  const temperatures = this.weather.hourly.temperature_2m;
-   const maxTemps : {
-    [key: string]:number;
-   } = {
-    
-   }
-  for(let i = 0 ; i < times.length ; i++){
-    const date = times[i];
-    const day = date.split('-')[2];
-    const hour = date.split('-')[3];
-    if(!maxTemps[day]){
-      maxTemps[day] = temperatures[i];
-    }else{
-      maxTemps[day] = Math.max(maxTemps[day],temperatures[i]);
+    const times = this.weather.hourly.time;
+    const temperatures = this.weather.hourly.temperature_2m;
+    const maxTemps: {
+      [key: string]: number;
+    } = {}
+    for (let i = 0; i < times.length; i++) {
+      const date = times[i];
+      const day = date.split('T')[0];
+      const hour = date.split('-')[3];
+      if (!maxTemps[day]) {
+        maxTemps[day] = temperatures[i];
+      } else {
+        maxTemps[day] = Math.max(maxTemps[day], temperatures[i]);
+      }
+
     }
-
+    this.temperatureMax = Object.values(maxTemps);
+    this.dailyTime = Object.keys(maxTemps);
+    console.log(this.temperatureMax);
+    console.log(this.dailyTime);
   }
-  this.temperatureMax = Object.values(maxTemps);
-  this.dailyTime = Object.keys(maxTemps);
-  console.log(this.temperatureMax);
-  console.log(this.dailyTime);
- 
-}
 
   private updateSummaryChart(): void {
     if (!this.summaryChart) return;
