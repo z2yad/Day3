@@ -9,7 +9,7 @@ Chart.register(...registerables);
 
 @Component({
   selector: 'app-dashbord',
-  imports: [NgClass,CommonModule],
+  imports: [NgClass, CommonModule],
   templateUrl: './dashbord.html',
   styleUrl: './dashbord.css',
 })
@@ -28,6 +28,7 @@ export class Dashbord implements OnInit {
   windspeed: number = 0;
   rain: number = 0;
   time: string = '2026/01/01';
+  
   //variables for daily weather
   temperatureMax: number[] = [];
   temperatureMin: number[] = [];
@@ -51,6 +52,7 @@ export class Dashbord implements OnInit {
   ngOnInit(): void {
     this.Weatherservice.getWeather().subscribe({
       next: (res) => {
+        console.log(res.current);
         //current weather
         this.weather = res;
         this.temperature = res.current.temperature_2m;
@@ -58,12 +60,15 @@ export class Dashbord implements OnInit {
         this.windspeed = res.current.wind_speed_10m;
         this.rain = res.current.rain;
         this.time = res.current.time;
+        
         //daily weather
-        this.temperatureMax = res.daily.temperature_2m_max;
+        // this.temperatureMax = res.daily.temperature_2m_max;
         this.temperatureMin = res.daily.temperature_2m_min;
         this.rainSum = res.daily.rain_sum;
         this.windSpeed10mMax = res.daily.wind_speed_10m_max;
         this.dailyTime = res.daily.time;
+        
+        //calculate max temp using current
 
         // 1. Temperature Max Diff & Percent
         if (this.temperatureMax.length >= 2) {
@@ -98,8 +103,8 @@ export class Dashbord implements OnInit {
         }
         console.log(res);
         console.log(this.temperatureMax[0])
-
-        // 👈 Update chart data dynamically when API response arrives
+        this.calculateTemperatureMax();
+        //  Update chart data dynamically when API response arrives
         this.updateSummaryChart();
         this.updateRadarChart();
       },
@@ -108,6 +113,20 @@ export class Dashbord implements OnInit {
       },
     });
   }
+   //calculate max temp using current
+private calculateTemperatureMax() {
+
+  const times = this.weather.hourly.time;
+  const temperatures = this.weather.hourly.temperature_2m;
+   const maxTemps : {[key: string]:number} = {
+    
+   }
+  for(let i = 0 ; i < times.length ; i++){
+     console.log(times[i].split('-'));
+
+  }
+ 
+}
 
   private updateSummaryChart(): void {
     if (!this.summaryChart) return;

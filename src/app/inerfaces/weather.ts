@@ -1,7 +1,15 @@
 export interface WeatherResponse {
-    current:Current;
-    daily:Daily;
+    current: Current;
+    daily: Daily;
+    hourly: Hourly;
+}
 
+export interface Hourly {
+    time: string[];
+    temperature_2m: number[];
+    relative_humidity_2m: number[];
+    rain: number[];
+    wind_speed_10m: number[];
 }
 export interface Current{
     temperature_2m:number;
