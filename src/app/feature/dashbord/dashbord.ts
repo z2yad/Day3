@@ -119,13 +119,26 @@ private calculateTemperatureMax() {
 
   const times = this.weather.hourly.time;
   const temperatures = this.weather.hourly.temperature_2m;
-   const maxTemps : {[key: string]:number} = {
+   const maxTemps : {
+    [key: string]:number;
+   } = {
     
    }
   for(let i = 0 ; i < times.length ; i++){
-     console.log(times[i].split('-'));
+    const date = times[i];
+    const day = date.split('-')[2];
+    const hour = date.split('-')[3];
+    if(!maxTemps[day]){
+      maxTemps[day] = temperatures[i];
+    }else{
+      maxTemps[day] = Math.max(maxTemps[day],temperatures[i]);
+    }
 
   }
+  this.temperatureMax = Object.values(maxTemps);
+  this.dailyTime = Object.keys(maxTemps);
+  console.log(this.temperatureMax);
+  console.log(this.dailyTime);
  
 }
 
