@@ -9,7 +9,7 @@ export class Weather {
   private http = inject(HttpClient);
 
   //return Api 
-  Url = 'https://api.open-meteo.com/v1/forecast?latitude=30.0626&longitude=31.2497&daily=temperature_2m_max,temperature_2m_min,rain_sum,wind_speed_10m_max&current=temperature_2m,relative_humidity_2m,rain,wind_speed_10m'
+  Url = 'https://api.open-meteo.com/v1/forecast?latitude=30.0626&longitude=31.2497&daily=temperature_2m_max,temperature_2m_min,rain_sum,wind_speed_10m_max&hourly=temperature_2m,relative_humidity_2m,rain,wind_speed_10m'
 
   //get weather Data
   getWeather() {

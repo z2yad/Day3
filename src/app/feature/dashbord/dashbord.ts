@@ -23,11 +23,11 @@ export class Dashbord implements OnInit {
   Weatherservice = inject(Weather);
   weather!: WeatherResponse;
   //variable for current  weather
-  temperature: number = 0;
-  humidity: number = 0;
-  windspeed: number = 0;
-  rain: number = 0;
-  time: string = '2026/01/01';
+  temperature: number[] = [];
+  humidity: number[] = [];
+  windspeed: number[] = [];
+  rain: number[] = [];
+  time: string[] = [];
   
   //variables for daily weather
   temperatureMax: number[] = [];
@@ -55,14 +55,14 @@ export class Dashbord implements OnInit {
         console.log(res.current);
         //current weather
         this.weather = res;
-        this.temperature = res.current.temperature_2m;
-        this.humidity = res.current.relative_humidity_2m;
-        this.windspeed = res.current.wind_speed_10m;
-        this.rain = res.current.rain;
-        this.time = res.current.time;
-        
+        this.temperature = res.hourly.temperature_2m;
+        this.humidity = res.hourly.relative_humidity_2m;
+        this.windspeed = res.hourly.wind_speed_10m;
+        this.rain = res.hourly.rain;
+        this.time = res.hourly.time;
+
         //daily weather
-        // this.temperatureMax = res.daily.temperature_2m_max;
+        //this.temperatureMax = res.daily.temperature_2m_max;
         this.temperatureMin = res.daily.temperature_2m_min;
         this.rainSum = res.daily.rain_sum;
         this.windSpeed10mMax = res.daily.wind_speed_10m_max;
@@ -103,6 +103,7 @@ export class Dashbord implements OnInit {
         }
         console.log(res);
         console.log(this.temperatureMax[0])
+        
         this.calculateTemperatureMax();
         //  Update chart data dynamically when API response arrives
         this.updateSummaryChart();
@@ -140,10 +141,10 @@ private calculateTemperatureMax() {
   private updateRadarChart(): void {
     if (!this.radarChart) return;
     this.radarChart.data.datasets[0].data = [
-      this.temperature,
-      this.humidity,
-      this.windspeed,
-      this.rain,
+      this.temperature[0] || 0,
+      this.humidity[0] || 0,
+      this.windspeed[0] || 0,
+      this.rain[0] || 0,
       this.temperatureMax[0] || 0,
       this.temperatureMin[0] || 0,
     ];
@@ -271,10 +272,10 @@ private calculateTemperatureMax() {
           {
             label: 'Weather Metrics',
             data: [
-              this.temperature,
-              this.humidity,
-              this.windspeed,
-              this.rain,
+              this.temperature[0] || 0,
+              this.humidity[0] || 0,
+              this.windspeed[0] || 0,
+              this.rain[0] || 0,
               this.temperatureMax[0] || 0,
               this.temperatureMin[0] || 0,
             ],
