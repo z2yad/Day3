@@ -63,7 +63,7 @@ export class Dashbord implements OnInit {
 
         //daily weather
         //this.temperatureMax = res.daily.temperature_2m_max;
-        this.temperatureMin = res.daily.temperature_2m_min;
+        // this.temperatureMin = res.daily.temperature_2m_min;
         this.rainSum = res.daily.rain_sum;
         this.windSpeed10mMax = res.daily.wind_speed_10m_max;
         this.dailyTime = res.daily.time;
@@ -105,6 +105,7 @@ export class Dashbord implements OnInit {
         console.log(this.temperatureMax[0])
 
         this.calculateTemperatureMax();
+        this.calculateTemperatureMin();
         //  Update chart data dynamically when API response arrives
         this.updateSummaryChart();
         this.updateRadarChart();
@@ -121,7 +122,9 @@ export class Dashbord implements OnInit {
     const temperatures = this.weather.hourly.temperature_2m;
     const maxTemps: {
       [key: string]: number;
-    } = {}
+    } = {
+
+    }
     for (let i = 0; i < times.length; i++) {
       const date = times[i];
       const day = date.split('T')[0];
@@ -135,7 +138,33 @@ export class Dashbord implements OnInit {
     }
     this.temperatureMax = Object.values(maxTemps);
     this.dailyTime = Object.keys(maxTemps);
-    console.log(this.temperatureMax);
+    // console.log(this.temperatureMax);
+    // console.log(this.dailyTime);
+  }
+  // calculate min temp using current
+  private calculateTemperatureMin() {
+
+    const times = this.weather.hourly.time;
+    const temperatures = this.weather.hourly.temperature_2m;
+    const minTemps: {
+      [key: string]: number;
+    } = {
+
+    }
+    for (let i = 0; i < times.length; i++) {
+      const date = times[i];
+      const day = date.split('T')[0];
+      const hour = date.split('-')[3];
+      if (!minTemps[day]) {
+        minTemps[day] = temperatures[i];
+      } else {
+        minTemps[day] = Math.min(minTemps[day], temperatures[i]);
+      }
+
+    }
+    this.temperatureMin = Object.values(minTemps);
+    // this.dailyTime = Object.keys(minTemps);
+    console.log(this.temperatureMin);
     console.log(this.dailyTime);
   }
 
