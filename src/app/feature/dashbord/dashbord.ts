@@ -105,7 +105,7 @@ export class Dashbord implements OnInit {
         console.log(this.temperatureMax[0])
 
         this.calculateTemperatureMax();
-        this.calculateTemperatureMin();
+        // this.calculateTemperatureMin();
         this.calculateWindSpeedMax();
         this.calculateRainSum();
         //  Update chart data dynamically when API response arrives
@@ -127,48 +127,57 @@ export class Dashbord implements OnInit {
     } = {
 
     }
-    for (let i = 0; i < times.length; i++) {
-      const date = times[i];
-      const day = date.split('T')[0];
-      const hour = date.split('-')[3];
-      if (!maxTemps[day]) {
-        maxTemps[day] = temperatures[i];
-      } else {
-        maxTemps[day] = Math.max(maxTemps[day], temperatures[i]);
-      }
-
-    }
-    this.temperatureMax = Object.values(maxTemps);
-    this.dailyTime = Object.keys(maxTemps);
-    // console.log(this.temperatureMax);
-    // console.log(this.dailyTime);
-  }
-  // calculate min temp using current
-  private calculateTemperatureMin() {
-
-    const times = this.weather.hourly.time;
-    const temperatures = this.weather.hourly.temperature_2m;
-    const minTemps: {
+    const minTemp :{
       [key: string]: number;
     } = {
 
     }
+  
     for (let i = 0; i < times.length; i++) {
       const date = times[i];
       const day = date.split('T')[0];
-      const hour = date.split('-')[3];
-      if (!minTemps[day]) {
-        minTemps[day] = temperatures[i];
+      if (maxTemps[day] === undefined || minTemp[day] === undefined) {
+        maxTemps[day] = temperatures[i];
+        minTemp[day] = temperatures[i];
       } else {
-        minTemps[day] = Math.min(minTemps[day], temperatures[i]);
+        maxTemps[day] = Math.max(maxTemps[day], temperatures[i]);
+        minTemp[day] = Math.min(minTemp[day], temperatures[i]);
       }
 
     }
-    this.temperatureMin = Object.values(minTemps);
-    // this.dailyTime = Object.keys(minTemps);
-    // console.log(this.temperatureMin);
+    this.temperatureMax = Object.values(maxTemps);
+    this.temperatureMin = Object.values(minTemp);
+    this.dailyTime = Object.keys(maxTemps);
+    console.log(this.temperatureMax);
+    console.log(this.temperatureMin);
     // console.log(this.dailyTime);
   }
+  // calculate min temp using current
+  // private calculateTemperatureMin() {
+
+  //   const times = this.weather.hourly.time;
+  //   const temperatures = this.weather.hourly.temperature_2m;
+  //   const minTemps: {
+  //     [key: string]: number;
+  //   } = {
+
+  //   }
+  //   for (let i = 0; i < times.length; i++) {
+  //     const date = times[i];
+  //     const day = date.split('T')[0];
+  //     const hour = date.split('-')[3];
+  //     if (!minTemps[day]) {
+  //       minTemps[day] = temperatures[i];
+  //     } else {
+  //       minTemps[day] = Math.min(minTemps[day], temperatures[i]);
+  //     }
+
+  //   }
+  //   this.temperatureMin = Object.values(minTemps);
+  //   // this.dailyTime = Object.keys(minTemps);
+  //   // console.log(this.temperatureMin);
+  //   // console.log(this.dailyTime);
+  // }
   //calaculate  wind speed max using current
   private calculateWindSpeedMax() {
 
@@ -182,7 +191,7 @@ export class Dashbord implements OnInit {
     for (let i = 0; i < times.length; i++) {
       const date = times[i];
       const day = date.split('T')[0];
-      if (!maxWindSpeeds[day]) {
+      if (maxWindSpeeds[day] === undefined) {
         maxWindSpeeds[day] = windSpeeds[i];
       } else {
         maxWindSpeeds[day] = Math.max(maxWindSpeeds[day], windSpeeds[i]);
@@ -207,7 +216,7 @@ export class Dashbord implements OnInit {
     for (let i = 0; i < times.length; i++) {
       const date = times[i];
       const day = date.split('T')[0];
-      if (!rainSums[day]) {
+      if (rainSums[day] === undefined) {
         rainSums[day] = rains[i];
       } else {
         rainSums[day] = rainSums[day] + rains[i];
