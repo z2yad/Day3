@@ -106,6 +106,8 @@ export class Dashbord implements OnInit {
 
         this.calculateTemperatureMax();
         this.calculateTemperatureMin();
+        this.calculateWindSpeedMax();
+        this.calculateRainSum();
         //  Update chart data dynamically when API response arrives
         this.updateSummaryChart();
         this.updateRadarChart();
@@ -164,10 +166,59 @@ export class Dashbord implements OnInit {
     }
     this.temperatureMin = Object.values(minTemps);
     // this.dailyTime = Object.keys(minTemps);
-    console.log(this.temperatureMin);
-    console.log(this.dailyTime);
+    // console.log(this.temperatureMin);
+    // console.log(this.dailyTime);
   }
+  //calaculate  wind speed max using current
+  private calculateWindSpeedMax() {
 
+    const times = this.weather.hourly.time;
+    const windSpeeds = this.weather.hourly.wind_speed_10m;
+    const maxWindSpeeds: {
+      [key: string]: number;
+    } = {
+
+    }
+    for (let i = 0; i < times.length; i++) {
+      const date = times[i];
+      const day = date.split('T')[0];
+      if (!maxWindSpeeds[day]) {
+        maxWindSpeeds[day] = windSpeeds[i];
+      } else {
+        maxWindSpeeds[day] = Math.max(maxWindSpeeds[day], windSpeeds[i]);
+      }
+
+    }
+    this.windSpeed10mMax = Object.values(maxWindSpeeds);
+    this.dailyTime = Object.keys(maxWindSpeeds);
+    // console.log(this.windSpeed10mMax);
+    // console.log(this.dailyTime);
+  }
+  //calculate  rain sum using current
+  private calculateRainSum() {
+
+    const times = this.weather.hourly.time;
+    const rains = this.weather.hourly.rain;
+    const rainSums: {
+      [key: string]: number;
+    } = {
+
+    }
+    for (let i = 0; i < times.length; i++) {
+      const date = times[i];
+      const day = date.split('T')[0];
+      if (!rainSums[day]) {
+        rainSums[day] = rains[i];
+      } else {
+        rainSums[day] = rainSums[day] + rains[i];
+      }
+
+    }
+    this.rainSum = Object.values(rainSums);
+    this.dailyTime = Object.keys(rainSums);
+    // console.log(this.rainSum);
+    // console.log(this.dailyTime);
+  }
   private updateSummaryChart(): void {
     if (!this.summaryChart) return;
     this.summaryChart.data.labels = this.dailyTime;
