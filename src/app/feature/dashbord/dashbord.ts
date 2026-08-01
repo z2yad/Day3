@@ -463,7 +463,24 @@ export class Dashbord implements OnInit {
       },
     });
   }
-  private updateRadarChart(matric:string): void {
+    updateRadarChartByMatric(matric:string): void {
+    let Data: number[] = [];
+    switch(matric){
+    case'tempMax':
+    Data = this.WeatherCities.map(city => city.weather.daily.temperature_2m_max[0]);
+    break;
+      case'tempMin':
+      Data = this.WeatherCities.map(city=>city.weather.daily.temperature_2m_min[0]);
+      break;
+      case'rain':
+      Data = this.WeatherCities.map(city => city.weather.daily.rain_sum[0]);
+      break;
+      case'windSpeed':
+      Data = this.WeatherCities.map(city => city.weather.daily.wind_speed_10m_max[0]);
+      break;
+    }
+
+
   }
 
 }
