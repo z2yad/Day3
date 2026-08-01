@@ -14,6 +14,4 @@ export class Weather {
 
     return this.http.get<WeatherResponse>(url);
   }
-
-
 }

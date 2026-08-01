@@ -25,8 +25,3 @@ export interface Daily {
     rain_sum: number[];
     wind_speed_10m_max: number[];
 }
-export interface City {
-    name: string;
-    latitude: number;
-    longitude: number;
-}

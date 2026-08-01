@@ -4,6 +4,8 @@ import { Chart, registerables } from 'chart.js';
 import { inject } from '@angular/core';
 import { Weather } from '../../services/weather';
 import { WeatherResponse } from '../../inerfaces/weather';
+import { City, weatherCities } from '../../inerfaces/city';
+
 
 Chart.register(...registerables);
 
@@ -48,6 +50,8 @@ export class Dashbord implements OnInit {
 
   windSpeedDiff: number = 0;
   windSpeedPrecent: string = '0%';
+
+  WeatherCities: weatherCities[] = [];
 
   ngOnInit(): void {
     this.Weatherservice.getWeather(30.0626,31.2497).subscribe({
@@ -111,6 +115,7 @@ export class Dashbord implements OnInit {
         //  Update chart data dynamically when API response arrives
         this.updateSummaryChart();
         this.updateRadarChart();
+        this.loadCitiesWeather();
       },
       error: (err) => {
         console.log(err);
@@ -228,7 +233,7 @@ export class Dashbord implements OnInit {
     // console.log(this.rainSum);
     // console.log(this.dailyTime);
   }
-  cities = [
+  cities :City[] = [
   {
     name: 'Cairo',
     latitude: 30.0626,
@@ -255,6 +260,22 @@ export class Dashbord implements OnInit {
     longitude: 32.3019
   }
 ];
+//load cities weather
+private loadCitiesWeather() {
+  this.WeatherCities = [];
+
+  for (const city of this.cities) {
+    this.Weatherservice
+      .getWeather(city.latitude, city.longitude)
+      .subscribe(res => {
+        this.WeatherCities.push({
+          city,
+          weather: res
+        });
+        console.log(this.WeatherCities);
+      });
+  }
+}
   private updateSummaryChart(): void {
     if (!this.summaryChart) return;
     this.summaryChart.data.labels = this.dailyTime;
