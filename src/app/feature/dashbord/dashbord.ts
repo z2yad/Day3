@@ -50,7 +50,7 @@ export class Dashbord implements OnInit {
   windSpeedPrecent: string = '0%';
 
   ngOnInit(): void {
-    this.Weatherservice.getWeather().subscribe({
+    this.Weatherservice.getWeather(30.0626,31.2497).subscribe({
       next: (res) => {
         console.log(res.current);
         //current weather
