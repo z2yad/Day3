@@ -407,13 +407,7 @@ export class Dashbord implements OnInit {
     this.radarChart = new Chart(ctx, {
       type: 'radar',
       data: {
-        labels: [
-          'Cairo',
-          'Alexandria',
-          'Mansoura',
-          'Aswan',
-          'Port Said'
-        ],
+        labels: this.WeatherCities.map(c => c.city.name),
         datasets: [
           {
             label: 'Weather Metrics',
@@ -468,6 +462,8 @@ export class Dashbord implements OnInit {
         },
       },
     });
+  }
+  private updateRadarChart(matric:string): void {
   }
 
 }
