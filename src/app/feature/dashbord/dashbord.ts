@@ -114,7 +114,7 @@ export class Dashbord implements OnInit {
         this.calculateRainSum();
         //  Update chart data dynamically when API response arrives
         this.updateSummaryChart();
-        this.updateRadarChart();
+        this.updateRadarChartByMatric('tempMax');
         this.loadCitiesWeather();
       },
       error: (err) => {
@@ -285,22 +285,10 @@ export class Dashbord implements OnInit {
     this.summaryChart.update();
   }
 
-  private updateRadarChart(): void {
-    if (!this.radarChart) return;
-    this.radarChart.data.datasets[0].data = [
-      this.temperature[0] || 0,
-      this.humidity[0] || 0,
-      this.windspeed[0] || 0,
-      this.rain[0] || 0,
-      this.temperatureMax[0] || 0,
-      this.temperatureMin[0] || 0,
-    ];
-    this.radarChart.update();
-  }
-
   ngAfterViewInit(): void {
     this.initSummaryChart();
     this.initRadarChart();
+
   }
 
   private initSummaryChart(): void {
@@ -411,13 +399,7 @@ export class Dashbord implements OnInit {
         datasets: [
           {
             label: 'Weather Metrics',
-            data: [
-              this.WeatherCities[0].weather.hourly.temperature_2m[0] || 0,
-              this.WeatherCities[1].weather.hourly.relative_humidity_2m[0] || 0,
-              this.WeatherCities[2].weather.hourly.wind_speed_10m[0] || 0,
-              this.WeatherCities[3].weather.hourly.rain[0] || 0,
-              this.WeatherCities[4].weather.hourly.temperature_2m[0] || 0,
-            ],
+            data:this.WeatherCities.map(city =>city.weather.daily.temperature_2m_max[0]),
             fill: true,
             backgroundColor: 'rgba(16, 185, 129, 0.2)',
             borderColor: '#10b981',
