@@ -54,7 +54,7 @@ export class Dashbord implements OnInit {
   WeatherCities: weatherCities[] = [];
 
   ngOnInit(): void {
-    this.Weatherservice.getWeather(30.0626,31.2497).subscribe({
+    this.Weatherservice.getWeather(30.0626, 31.2497).subscribe({
       next: (res) => {
         console.log(res.current);
         //current weather
@@ -132,12 +132,12 @@ export class Dashbord implements OnInit {
     } = {
 
     }
-    const minTemp :{
+    const minTemp: {
       [key: string]: number;
     } = {
 
     }
-  
+
     for (let i = 0; i < times.length; i++) {
       const date = times[i];
       const day = date.split('T')[0];
@@ -153,8 +153,8 @@ export class Dashbord implements OnInit {
     this.temperatureMax = Object.values(maxTemps);
     this.temperatureMin = Object.values(minTemp);
     this.dailyTime = Object.keys(maxTemps);
-    console.log(this.temperatureMax);
-    console.log(this.temperatureMin);
+    // console.log(this.temperatureMax);
+    // console.log(this.temperatureMin);
     // console.log(this.dailyTime);
   }
   // calculate min temp using current
@@ -196,7 +196,7 @@ export class Dashbord implements OnInit {
     for (let i = 0; i < times.length; i++) {
       const date = times[i];
       const day = date.split('T')[0];
-     if (maxWindSpeeds[day] === undefined) {
+      if (maxWindSpeeds[day] === undefined) {
         maxWindSpeeds[day] = windSpeeds[i];
       } else {
         maxWindSpeeds[day] = Math.max(maxWindSpeeds[day], windSpeeds[i]);
@@ -233,49 +233,49 @@ export class Dashbord implements OnInit {
     // console.log(this.rainSum);
     // console.log(this.dailyTime);
   }
-  cities :City[] = [
-  {
-    name: 'Cairo',
-    latitude: 30.0626,
-    longitude: 31.2497
-  },
-  {
-    name: 'Alexandria',
-    latitude: 31.2001,
-    longitude: 29.9187
-  },
-  {
-    name: 'Mansoura',
-    latitude: 31.0409,
-    longitude: 31.3785
-  },
-  {
-    name: 'Aswan',
-    latitude: 24.0889,
-    longitude: 32.8998
-  },
-  {
-    name: 'Port Said',
-    latitude: 31.2653,
-    longitude: 32.3019
-  }
-];
-//load cities weather
-private loadCitiesWeather() {
-  this.WeatherCities = [];
+  cities: City[] = [
+    {
+      name: 'Cairo',
+      latitude: 30.0626,
+      longitude: 31.2497
+    },
+    {
+      name: 'Alexandria',
+      latitude: 31.2001,
+      longitude: 29.9187
+    },
+    {
+      name: 'Mansoura',
+      latitude: 31.0409,
+      longitude: 31.3785
+    },
+    {
+      name: 'Aswan',
+      latitude: 24.0889,
+      longitude: 32.8998
+    },
+    {
+      name: 'Port Said',
+      latitude: 31.2653,
+      longitude: 32.3019
+    }
+  ];
+  //load cities weather
+  private loadCitiesWeather() {
+    this.WeatherCities = [];
 
-  for (const city of this.cities) {
-    this.Weatherservice
-      .getWeather(city.latitude, city.longitude)
-      .subscribe(res => {
-        this.WeatherCities.push({
-          city,
-          weather: res
+    for (const city of this.cities) {
+      this.Weatherservice
+        .getWeather(city.latitude, city.longitude)
+        .subscribe(res => {
+          this.WeatherCities.push({
+            city,
+            weather: res
+          });
+          // console.log(this.WeatherCities);
         });
-        console.log(this.WeatherCities);
-      });
+    }
   }
-}
   private updateSummaryChart(): void {
     if (!this.summaryChart) return;
     this.summaryChart.data.labels = this.dailyTime;
@@ -408,23 +408,21 @@ private loadCitiesWeather() {
       type: 'radar',
       data: {
         labels: [
-          'Temperature (°C)',
-          'Humidity (%)',
-          'Wind Speed (km/h)',
-          'Rain (mm)',
-          'Temp Max (°C)',
-          'Temp Min (°C)',
+          'Cairo',
+          'Alexandria',
+          'Mansoura',
+          'Aswan',
+          'Port Said'
         ],
         datasets: [
           {
             label: 'Weather Metrics',
             data: [
-              this.temperature[0] || 0,
-              this.humidity[0] || 0,
-              this.windspeed[0] || 0,
-              this.rain[0] || 0,
-              this.temperatureMax[0] || 0,
-              this.temperatureMin[0] || 0,
+              this.WeatherCities[0].weather.hourly.temperature_2m[0] || 0,
+              this.WeatherCities[1].weather.hourly.relative_humidity_2m[0] || 0,
+              this.WeatherCities[2].weather.hourly.wind_speed_10m[0] || 0,
+              this.WeatherCities[3].weather.hourly.rain[0] || 0,
+              this.WeatherCities[4].weather.hourly.temperature_2m[0] || 0,
             ],
             fill: true,
             backgroundColor: 'rgba(16, 185, 129, 0.2)',
