@@ -9,4 +9,5 @@ export interface City {
 export interface weatherCities {
     city: City;
     weather: WeatherResponse;
+    
 }
