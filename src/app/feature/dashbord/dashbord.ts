@@ -105,17 +105,17 @@ export class Dashbord implements OnInit {
           this.windSpeedDiff = Number((day2 - day1).toFixed(1));
           this.windSpeedPrecent = (day1 !== 0 ? ((this.windSpeedDiff / day1) * 100).toFixed(2) : '0') + '%';
         }
-        console.log(res);
-        console.log(this.temperatureMax[0])
+        // console.log(res);
+        // console.log(this.temperatureMax[0])
 
         this.calculateTemperatureMax();
         // this.calculateTemperatureMin();
         this.calculateWindSpeedMax();
         this.calculateRainSum();
         //  Update chart data dynamically when API response arrives
-        this.updateSummaryChart();
-        this.updateRadarChartByMatric('tempMax');
-        this.loadCitiesWeather();
+        // this.updateSummaryChart();
+        // this.updateRadarChartByMatric('tempMax');
+        // this.loadCitiesWeather();
       },
       error: (err) => {
         console.log(err);
