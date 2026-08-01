@@ -228,6 +228,33 @@ export class Dashbord implements OnInit {
     // console.log(this.rainSum);
     // console.log(this.dailyTime);
   }
+  cities = [
+  {
+    name: 'Cairo',
+    latitude: 30.0626,
+    longitude: 31.2497
+  },
+  {
+    name: 'Alexandria',
+    latitude: 31.2001,
+    longitude: 29.9187
+  },
+  {
+    name: 'Mansoura',
+    latitude: 31.0409,
+    longitude: 31.3785
+  },
+  {
+    name: 'Aswan',
+    latitude: 24.0889,
+    longitude: 32.8998
+  },
+  {
+    name: 'Port Said',
+    latitude: 31.2653,
+    longitude: 32.3019
+  }
+];
   private updateSummaryChart(): void {
     if (!this.summaryChart) return;
     this.summaryChart.data.labels = this.dailyTime;
