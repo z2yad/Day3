@@ -115,7 +115,7 @@ export class Dashbord implements OnInit {
         //  Update chart data dynamically when API response arrives
         // this.updateSummaryChart();
         // this.updateRadarChartByMatric('tempMax');
-        // this.loadCitiesWeather();
+        this.loadCitiesWeather();
       },
       error: (err) => {
         console.log(err);
@@ -276,14 +276,6 @@ export class Dashbord implements OnInit {
         });
     }
   }
-  private updateSummaryChart(): void {
-    if (!this.summaryChart) return;
-    this.summaryChart.data.labels = this.dailyTime;
-    this.summaryChart.data.datasets[0].data = this.temperatureMax;
-    this.summaryChart.data.datasets[1].data = this.temperatureMin;
-    this.summaryChart.data.datasets[2].data = this.windSpeed10mMax;
-    this.summaryChart.update();
-  }
 
   ngAfterViewInit(): void {
     this.initSummaryChart();
@@ -395,11 +387,11 @@ export class Dashbord implements OnInit {
     this.radarChart = new Chart(ctx, {
       type: 'radar',
       data: {
-        labels: this.WeatherCities.map(c => c.city.name),
+        labels: [],
         datasets: [
           {
             label: 'Weather Metrics',
-            data:this.WeatherCities.map(city =>city.weather.daily.temperature_2m_max[0]),
+            data: [],
             fill: true,
             backgroundColor: 'rgba(16, 185, 129, 0.2)',
             borderColor: '#10b981',
@@ -445,24 +437,45 @@ export class Dashbord implements OnInit {
       },
     });
   }
-    updateRadarChartByMatric(matric:string): void {
-    let Data: number[] = [];
-    switch(matric){
-    case'tempMax':
-    Data = this.WeatherCities.map(city => city.weather.daily.temperature_2m_max[0]);
-    break;
-      case'tempMin':
-      Data = this.WeatherCities.map(city=>city.weather.daily.temperature_2m_min[0]);
-      break;
-      case'rain':
-      Data = this.WeatherCities.map(city => city.weather.daily.rain_sum[0]);
-      break;
-      case'windSpeed':
-      Data = this.WeatherCities.map(city => city.weather.daily.wind_speed_10m_max[0]);
-      break;
+  updateRadarChartByMatric(metric: string) {
+
+    let data: number[] = [];
+
+    switch (metric) {
+
+      case 'tempMax':
+        data = this.WeatherCities.map(city =>
+          city.weather.daily.temperature_2m_max[0]
+        );
+        break;
+
+      case 'tempMin':
+        data = this.WeatherCities.map(city =>
+          city.weather.daily.temperature_2m_min[0]
+        );
+        break;
+
+      case 'rain':
+        data = this.WeatherCities.map(city =>
+          city.weather.daily.rain_sum[0]
+        );
+        break;
+
+      case 'windSpeed':
+        data = this.WeatherCities.map(city =>
+          city.weather.daily.wind_speed_10m_max[0]
+        );
+        break;
     }
 
+    this.radarChart.data.labels =
+      this.WeatherCities.map(city => city.city.name);
 
+    this.radarChart.data.datasets[0].data = data;
+
+    this.radarChart.data.datasets[0].label = metric;
+
+    this.radarChart.update();
   }
 
 }
