@@ -191,7 +191,7 @@ export class Dashbord implements OnInit {
     for (let i = 0; i < times.length; i++) {
       const date = times[i];
       const day = date.split('T')[0];
-      if (maxWindSpeeds[day] === undefined) {
+     if (maxWindSpeeds[day] === undefined) {
         maxWindSpeeds[day] = windSpeeds[i];
       } else {
         maxWindSpeeds[day] = Math.max(maxWindSpeeds[day], windSpeeds[i]);
