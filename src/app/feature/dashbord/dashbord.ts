@@ -154,32 +154,7 @@ export class Dashbord implements OnInit {
     // console.log(this.temperatureMin);
     // console.log(this.dailyTime);
   }
-  // calculate min temp using current
-  // private calculateTemperatureMin() {
-
-  //   const times = this.weather.hourly.time;
-  //   const temperatures = this.weather.hourly.temperature_2m;
-  //   const minTemps: {
-  //     [key: string]: number;
-  //   } = {
-
-  //   }
-  //   for (let i = 0; i < times.length; i++) {
-  //     const date = times[i];
-  //     const day = date.split('T')[0];
-  //     const hour = date.split('-')[3];
-  //     if (!minTemps[day]) {
-  //       minTemps[day] = temperatures[i];
-  //     } else {
-  //       minTemps[day] = Math.min(minTemps[day], temperatures[i]);
-  //     }
-
-  //   }
-  //   this.temperatureMin = Object.values(minTemps);
-  //   // this.dailyTime = Object.keys(minTemps);
-  //   // console.log(this.temperatureMin);
-  //   // console.log(this.dailyTime);
-  // }
+  
   //calaculate  wind speed max using current
   private calculateWindSpeedMax() {
 
