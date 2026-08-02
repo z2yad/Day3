@@ -25,6 +25,8 @@ export class Dashbord implements OnInit {
   radarChart!: Chart;
   Weatherservice = inject(Weather);
   weather!: WeatherResponse;
+  WeatherCities: weatherCities[] = [];
+
   //variable for current  weather
   temperature: number[] = [];
   humidity: number[] = [];
@@ -52,7 +54,7 @@ export class Dashbord implements OnInit {
   windSpeedDiff: number = 0;
   windSpeedPrecent: string = '0%';
 
-  WeatherCities: weatherCities[] = [];
+
 
   ngOnInit(): void {
     this.Weatherservice.getWeather(30.0626, 31.2497).subscribe({
@@ -150,11 +152,11 @@ export class Dashbord implements OnInit {
     this.temperatureMax = Object.values(maxTemps);
     this.temperatureMin = Object.values(minTemp);
     this.dailyTime = Object.keys(maxTemps);
-    // console.log(this.temperatureMax);
-    // console.log(this.temperatureMin);
-    // console.log(this.dailyTime);
+    console.log(this.temperatureMax);
+    console.log(this.temperatureMin);
+    console.log(this.dailyTime);
   }
-  
+
   //calaculate  wind speed max using current
   private calculateWindSpeedMax() {
 
@@ -348,20 +350,20 @@ export class Dashbord implements OnInit {
       },
     });
   }
-//update symmary
-private updateSummaryChart(): void {
-  if (!this.summaryChart) return;
+  //update symmary
+  private updateSummaryChart(): void {
+    if (!this.summaryChart) return;
 
-  this.summaryChart.data.labels = this.dailyTime;
+    this.summaryChart.data.labels = this.dailyTime;
 
-  this.summaryChart.data.datasets[0].data = this.temperatureMax;
+    this.summaryChart.data.datasets[0].data = this.temperatureMax;
 
-  this.summaryChart.data.datasets[1].data = this.temperatureMin;
+    this.summaryChart.data.datasets[1].data = this.temperatureMin;
 
-  this.summaryChart.data.datasets[2].data = this.windSpeed10mMax;
+    this.summaryChart.data.datasets[2].data = this.windSpeed10mMax;
 
-  this.summaryChart.update();
-}
+    this.summaryChart.update();
+  }
   private initRadarChart(): void {
     if (!this.radarChartRef) return;
     const ctx = this.radarChartRef.nativeElement.getContext('2d');
